@@ -1,3 +1,5 @@
+console.log('APP ATUALIZADO');
+
 require('./database/database');
 
 const express = require('express');
@@ -11,6 +13,10 @@ app.use(express.json());
 app.use(cors());
 
 app.use(taskRoutes);
+
+app.get('/teste', (req, res) => {
+  res.send('rota teste funcionando');
+}); 
 
 app.get('/', (req, res) => {
   res.json({ mensagem: 'API TaskForge rodando' });

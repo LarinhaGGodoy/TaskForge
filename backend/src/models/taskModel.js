@@ -27,7 +27,24 @@ const getAllTasks = (callback) => {
   });
 };
 
+const deleteTask = (id, callback) => {
+  const query = 'DELETE FROM tasks WHERE id = ?';
+
+  db.run(query, [id], function (err) {
+    if (err) {
+      return callback(err);
+    }
+
+    if (this.changes === 0) {
+      return callback(new Error('NotFound'));
+    }
+
+    callback(null);
+  });
+};
+
 module.exports = {
   createTask,
-  getAllTasks
+  getAllTasks,
+  deleteTask
 };

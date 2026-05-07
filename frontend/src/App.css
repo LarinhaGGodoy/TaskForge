@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #edf2ef, #e7dcf5);
+  min-height: 100vh;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(12px);
+  border-radius: 35px;
+  padding: 35px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #5c5470;
+}
+
+.top p {
+  color: #7b748d;
+  margin-top: 5px;
+}
+
+.mini-card {
+  background: #d8c4ec;
+  padding: 20px;
+  border-radius: 25px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.mini-card span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.mini-card p {
+  color: white;
+}
+
+.home-card {
+  background: linear-gradient(to right, #f8e8ee, #e9d5ff);
+  padding: 25px;
+  border-radius: 25px;
+  margin-bottom: 30px;
+}
+
+.home-card h2 {
+  color: #5c5470;
+  margin-bottom: 10px;
+}
+
+.home-card p {
+  color: #6e6781;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+input {
+  padding: 16px;
+  border: none;
+  border-radius: 18px;
+  background: #f8f8f8;
+  font-size: 1rem;
+  outline: none;
+}
+
+button {
+  padding: 16px;
+  border: none;
+  border-radius: 18px;
+  background: #cdb4db;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  background: white;
+  padding: 18px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  color: #5c5470;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}

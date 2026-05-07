@@ -32,7 +32,34 @@ const getAllTasks = (req, res) => {
   });
 };
 
+const deleteTask = (req, res) => {
+  const id = Number(req.params.id);
+
+  if (Number.isNaN(id)) {
+    return res.status(400).json({
+      error: 'ID inválido'
+    });
+  }
+
+  taskModel.deleteTask(id, (err) => {
+    if (err) {
+      if (err.message === 'NotFound') {
+        return res.status(404).json({
+          error: 'Tarefa não encontrada'
+        });
+      }
+
+      return res.status(500).json({
+        error: 'Erro ao excluir tarefa'
+      });
+    }
+
+    res.status(204).send();
+  });
+};
+
 module.exports = {
   createTask,
-  getAllTasks
+  getAllTasks,
+  deleteTask
 };
