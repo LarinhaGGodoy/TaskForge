@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import './App.css';
+import { createTask, deleteTask as deleteTaskService, getTasks } from './services/tasksService';
+import type { Task } from './services/tasksService';
 
 function App() {
-  const [tasks, setTasks] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [taskName, setTaskName] = useState('');
   const [taskDate, setTaskDate] = useState('');
 
@@ -15,8 +16,8 @@ function App() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/tasks');
-      setTasks(response.data);
+      const data = await getTasks();
+      setTasks(data);
     } catch (error) {
       console.error('Erro ao buscar tarefas');
     }
@@ -32,10 +33,7 @@ function App() {
     if (!taskName) return;
 
     try {
-      await axios.post('http://localhost:3000/tasks', {
-        name: `${taskName} • ${taskDate}`
-      });
-
+      await createTask(`${taskName} • ${taskDate}`);
       setTaskName('');
       setTaskDate('');
       fetchTasks();
@@ -44,12 +42,17 @@ function App() {
     }
   };
 
-  const deleteTask = async (id: number) => {
+  const deleteTask = async (id: number | undefined) => {
+    if (typeof id !== 'number') {
+      console.error('ID inválido para exclusão:', id);
+      return;
+    }
+
     try {
-      await axios.delete(`http://localhost:3000/tasks/${id}`);
-      fetchTasks();
+      await deleteTaskService(id);
+      setTasks((currentTasks) => currentTasks.filter((task) => task.id !== id));
     } catch (error) {
-      console.error('Erro ao excluir tarefa');
+      console.error('Erro ao excluir tarefa', error);
     }
   };
 
@@ -59,7 +62,7 @@ function App() {
 
         <div className="top">
           <div>
-            <h1>TaskForge ✨</h1>
+            <h1>TaskForge</h1>
             <p>{today}</p>
           </div>
 
@@ -70,9 +73,9 @@ function App() {
         </div>
 
         <div className="home-card">
-          <h2>Organize sua mente 🌸</h2>
+          <h2> Visão clara do seu dia. </h2>
           <p>
-            Planeje seu dia de forma leve, simples e bonita.
+           Estruture seu dia, acompanhe suas atividades e mantenha sua rotina sob controle.
           </p>
         </div>
 
